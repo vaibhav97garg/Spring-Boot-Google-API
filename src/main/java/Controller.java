@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import spring.boot.rest.thymeleafdemo.entity.EmployeesEntity;
 import spring.boot.rest.thymeleafdemo.entity.SheetsEntity;
-import spring.boot.rest.thymeleafdemo.service.EmployeesService;
 import spring.boot.rest.thymeleafdemo.service.SheetsService;
 
 @Controller
@@ -21,9 +19,6 @@ public class DemoController {
 	
 	@Autowired
 	private SheetsService sheetsService;
-	
-	@Autowired 
-	private EmployeesService employeesService;
 	
 	@GetMapping("/hello")
 	public String anything() {
@@ -37,18 +32,6 @@ public class DemoController {
 		return "student";
 	}
 	
-	@GetMapping("/employees")
-	public String Employee(Model theModel) {
-		EmployeesEntity ee = new EmployeesEntity();
-		theModel.addAttribute("employees",ee);
-		return "employees";
-	}
-	
-	@PostMapping("/esave")
-	public String saveData(@ModelAttribute("employees") EmployeesEntity ee) throws IOException {
-		employeesService.save2(ee);
-		return "redirect:/api/hello";
-	}
 	
 	@PostMapping("/save")
 	public String saveData(@ModelAttribute("sheets") SheetsEntity se) throws IOException {
